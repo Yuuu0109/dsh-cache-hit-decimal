@@ -29,7 +29,7 @@ dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal --registry=https
 pnpm 11 可能会将发布不足 24 小时的版本延迟更新。需要立即更新时执行：
 
 ```sh
-dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal --latest --config.minimumReleaseAge=0
+dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal@0.1.4 --config.minimumReleaseAge=0
 ```
 
 ## 从源码安装

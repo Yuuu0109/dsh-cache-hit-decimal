@@ -29,7 +29,7 @@ dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal --registry=https
 pnpm 11 may delay newly published versions for 24 hours. To update immediately:
 
 ```sh
-dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal --latest --config.minimumReleaseAge=0
+dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal@0.1.4 --config.minimumReleaseAge=0
 ```
 
 ## Install from source
