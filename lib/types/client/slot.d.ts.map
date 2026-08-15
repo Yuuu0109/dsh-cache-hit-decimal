@@ -1,0 +1,1 @@
+{"version":3,"file":"slot.d.ts","sourceRoot":"","sources":["../../../src/client/slot.ts"],"names":[],"mappings":"AAAA,eAAO,MAAM,eAAe,+BAA+B,CAAA;AAC3D,eAAO,MAAM,aAAa,UAAU,CAAA;AACpC,eAAO,MAAM,mBAAmB,KAAK,CAAA;AACrC,eAAO,MAAM,YAAY,iBAAiB,CAAA;AAO1C;;;;GAIG;AACH,wBAAgB,oBAAoB,CAAC,GAAG,EAAE;IAAE,KAAK,EAAE,OAAO,CAAA;CAAE,EAAE,SAAS,EAAE,OAAO,GAAG,IAAI,CAQtF"}

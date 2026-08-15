@@ -1,0 +1,5 @@
+# Bundle patch applied after the selected DSH profile bundles.
+# Removing the package with `dsh plugin remove` also removes this layer.
+- insert:
+    - id: cache-hit-decimal
+      name: '@yuuu0109/dsh-cache-hit-decimal'
