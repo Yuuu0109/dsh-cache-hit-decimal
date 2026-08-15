@@ -7,13 +7,20 @@ It shadows the existing `stats` cell in `conversation.composer.dock` instead of 
 ## Install
 
 ```sh
-git clone https://github.com/Yuuu0109/dsh-cache-hit-decimal.git
-cd dsh-cache-hit-decimal
-pnpm install
-dsh plugin --profile web add .
+dsh plugin --profile web add @yuuu0109/dsh-cache-hit-decimal
 ```
 
 Restart the `dsh web` process and refresh the browser.
+
+## Install from source
+
+```sh
+git clone https://github.com/Yuuu0109/dsh-cache-hit-decimal.git
+cd dsh-cache-hit-decimal
+pnpm install
+pnpm build
+dsh plugin --profile web add .
+```
 
 ## Uninstall
 

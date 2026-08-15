@@ -1,7 +1,7 @@
 {
   "name": "@yuuu0109/dsh-cache-hit-decimal",
   "description": "DeepSeek Harness web plugin that displays cache-hit rate with one decimal place",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "packageManager": "pnpm@11.21.0",
   "engines": {

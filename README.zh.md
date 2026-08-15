@@ -7,13 +7,20 @@
 ## 安装
 
 ```sh
-git clone https://github.com/Yuuu0109/dsh-cache-hit-decimal.git
-cd dsh-cache-hit-decimal
-pnpm install
-dsh plugin --profile web add .
+dsh plugin --profile web add @yuuu0109/dsh-cache-hit-decimal
 ```
 
 重启 `dsh web` 进程并刷新浏览器。
+
+## 从源码安装
+
+```sh
+git clone https://github.com/Yuuu0109/dsh-cache-hit-decimal.git
+cd dsh-cache-hit-decimal
+pnpm install
+pnpm build
+dsh plugin --profile web add .
+```
 
 ## 卸载
 
