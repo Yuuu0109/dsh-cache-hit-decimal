@@ -143,5 +143,5 @@ export function billedInputTokens(usage: TokenUsageProjection): number {
 export function cacheHitPercent(usage: TokenUsageProjection): number | null {
   const denominator = billedInputTokens(usage)
   if (denominator === 0) return null
-  return Math.round(usage.cacheReadTokens / denominator * 1000) / 10
+  return Math.round(usage.cacheReadTokens / denominator * 10000) / 100
 }

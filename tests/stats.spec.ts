@@ -17,13 +17,13 @@ describe('cache-hit formatting', () => {
     })).toBe(9)
   })
 
-  it('keeps one decimal place instead of rounding to an integer', () => {
+  it('keeps two decimal places instead of rounding to an integer', () => {
     expect(cacheHitPercent({
       uncachedInputTokens: 4,
       cacheReadTokens: 3,
       cacheWriteTokens: 0,
       outputTokens: 10,
-    })).toBe(42.9)
+    })).toBe(42.86)
   })
 
   it('keeps exact hundred-percent hits without trailing digits', () => {

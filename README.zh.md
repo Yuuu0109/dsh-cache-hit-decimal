@@ -1,6 +1,6 @@
 # dsh-cache-hit-decimal
 
-一个轻量的 DeepSeek Harness Web 插件，将原生整数缓存命中率替换为保留一位小数的显示，例如 `42.9%`。
+一个轻量的 DeepSeek Harness Web 插件，将原生整数缓存命中率替换为保留两位小数的显示，例如 `42.86%`。
 
 它覆盖 `conversation.composer.dock` 中已有的 `stats` 单元格，不修改官方 conversation 包。移除插件后，原生整数统计条会自动恢复。
 
