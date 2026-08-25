@@ -2,6 +2,8 @@
 
 一个轻量的 DeepSeek Harness Web 插件，将原生整数缓存命中率替换为保留两位小数的显示，例如 `42.86%`。
 
+![缓存命中率](docs/screenshots/cache-hit-decimal.png)
+
 它覆盖 `conversation.composer.dock` 中已有的 `stats` 单元格，不修改官方 conversation 包。移除插件后，原生整数统计条会自动恢复。
 
 [English](README.md)

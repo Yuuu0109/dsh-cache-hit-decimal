@@ -2,6 +2,8 @@
 
 A small DeepSeek Harness Web plugin that replaces the native integer cache-hit percentage with a two-decimal value, such as `42.86%`.
 
+![Cache-hit decimal](docs/screenshots/cache-hit-decimal.png)
+
 It shadows the existing `stats` cell in `conversation.composer.dock` instead of patching the official conversation package. Removing the plugin restores the native integer display.
 
 [中文说明](README.zh.md)
