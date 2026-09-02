@@ -32,6 +32,7 @@ describe('decimal cache-hit slot registration', () => {
     expect(register.mock.calls[0]?.[0]).toEqual({
       name: STATS_DOCK_NAME,
       id: STATS_SLOT_ID,
+      order: 0,
       priority: STATS_SLOT_PRIORITY,
       locale: STATS_LOCALE,
     })

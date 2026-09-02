@@ -31,7 +31,7 @@ dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal --registry=https
 pnpm 11 可能会将发布不足 24 小时的版本延迟更新。需要立即更新时执行：
 
 ```sh
-dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal@0.1.4 --config.minimumReleaseAge=0
+dsh plugin --profile web update @yuuu0109/dsh-cache-hit-decimal@0.2.0 --config.minimumReleaseAge=0
 ```
 
 ## 从源码安装
@@ -45,6 +45,12 @@ dsh plugin --profile web add .
 ```
 
 ## Changelog
+
+### 0.2.0
+
+- 适配 DeepSeek Harness `0.1.2-alpha.4`：依赖与 peer 从 `0.1.0-rc.6` 升级到 `0.1.2-alpha.4`。
+- 统计条改为通过标准会话 hooks（`useProjection` / `useChat`）读取主机端计算的 `sessionStats` 与 `tokenUsage` 投影，旧版节点折叠逻辑保留为兜底。
+- 槽位注册适配当前 list-slot 契约（`id`/`order`/`priority`，`locale: 'chat'`）；仍以 `priority: -1` 覆盖原生 `stats` 单元格，移除插件后恢复整数显示。
 
 ### 0.1.4
 
@@ -70,6 +76,6 @@ pnpm test
 pnpm build
 ```
 
-兼容版本固定为 DeepSeek Harness `0.1.0-rc.6` 与 React 18。
+兼容版本固定为 DeepSeek Harness `0.1.2-alpha.4` 与 React 18。
 
 本仓库是独立社区插件，不属于 DeepSeek Harness 官方仓库。

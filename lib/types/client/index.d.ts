@@ -1,4 +1,4 @@
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client';
+import type { Context } from '@deepseek-ai/cordis';
 export declare const inject: string[];
 /**
  * Browser half of the plugin.
@@ -8,5 +8,5 @@ export declare const inject: string[];
  * priority shadows that native entry. Removing this plugin disposes the
  * registration and restores the original integer formatting.
  */
-export declare function apply(ctx: ClientContext): void;
+export declare function apply(ctx: Context): void;
 //# sourceMappingURL=index.d.ts.map

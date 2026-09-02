@@ -1,23 +1,27 @@
 export const STATS_DOCK_NAME = 'conversation.composer.dock'
 export const STATS_SLOT_ID = 'stats'
 export const STATS_SLOT_PRIORITY = -1
-export const STATS_LOCALE = 'conversation'
+export const STATS_LOCALE = 'chat'
 
-interface SlotRegistrar {
-  inject: (slot: string, install: () => void) => void
-  register: (options: Record<string, unknown>, component: unknown) => () => void
+/** Minimal runtime face of the current `ctx.slots` service this plugin uses. */
+interface SlotRegistrarLike {
+  inject(key: string, install: () => unknown): unknown
+  register(options: unknown, component: unknown): unknown
 }
 
 /**
  * Register the decimal stats line as a lower-priority occupant of the native
- * stats cell. Disposing the returned slot registration restores the native
- * integer component.
+ * `stats` cell in the composer dock. The native entry (`dsh-client-ui-chat`)
+ * registers the same cell at priority 0; priority -1 shadows it, and
+ * disposing the returned slot registration restores the native integer
+ * formatting.
  */
-export function installStatsOverride(ctx: { slots: unknown }, component: unknown): void {
-  const slots = ctx.slots as SlotRegistrar
+export function installStatsOverride(ctx: { slots: SlotRegistrarLike }, component: unknown): void {
+  const slots = ctx.slots
   slots.inject(STATS_DOCK_NAME, () => slots.register({
     name: STATS_DOCK_NAME,
     id: STATS_SLOT_ID,
+    order: 0,
     priority: STATS_SLOT_PRIORITY,
     locale: STATS_LOCALE,
   }, component))

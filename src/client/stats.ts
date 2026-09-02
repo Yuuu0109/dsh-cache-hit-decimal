@@ -1,22 +1,7 @@
-export interface TokenUsageProjection {
-  uncachedInputTokens: number
-  cacheReadTokens: number
-  cacheWriteTokens: number
-  outputTokens: number
-}
+import type { SessionStatsProjection } from '@deepseek-ai/dsh-session-stats/types'
+import type { TokenUsageProjection } from '@deepseek-ai/dsh-token-meter/client'
 
-export interface SessionStatsProjection {
-  turns: number
-  steps: number
-  llmMs: number
-  toolMs: number
-  ttftMs: number
-  ttftSteps: number
-  decodeMs: number
-  decodeTokens: number
-}
-
-export interface WindowStats extends SessionStatsProjection {}
+export type { SessionStatsProjection, TokenUsageProjection }
 
 interface UsageReading {
   ttftMs: number | null
@@ -51,7 +36,11 @@ function assistantStepReading(node: unknown): UsageReading {
   }
 }
 
-export function deriveStats(nodes: readonly unknown[]): WindowStats {
+/**
+ * Fold the legacy window nodes into the same shape as the host-computed
+ * `sessionStats` projection, so the two swap wholesale.
+ */
+export function deriveStats(nodes: readonly unknown[]): SessionStatsProjection {
   const turns = new Set<unknown>()
   let steps = 0
   let llmMs = 0

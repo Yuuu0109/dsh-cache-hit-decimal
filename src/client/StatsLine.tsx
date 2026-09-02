@@ -1,6 +1,7 @@
 import * as React from 'react'
-import type {} from '@deepseek-ai/dsh-client-ui-conversation/client'
-import type { PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
+import type { UseProjection } from '@deepseek-ai/dsh-api-session-controller/client'
+import type { ChatSnapshot } from '@deepseek-ai/dsh-client-ui-chat/client'
+import type { PropsLocale, SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots'
 import { Tooltip } from '@deepseek-ai/dsh-client-ui-primitives'
 import {
   billedInputTokens,
@@ -9,8 +10,6 @@ import {
   formatDuration,
   formatTokens,
   formatTokensPerSecond,
-  type SessionStatsProjection,
-  type TokenUsageProjection,
 } from './stats'
 
 const css = ".DChp_root{box-sizing:border-box;width:max-content;max-width:none;padding:4px calc(var(--dsh-composer-side-clearance) + 16px) 0;color:var(--dsw-alias-label-tertiary);white-space:nowrap;text-overflow:clip;margin:0 auto;font-size:12px;line-height:20px;display:flex;flex-wrap:nowrap;justify-content:center;overflow:visible}.DChp_sep{color:var(--dsw-alias-separator-primary);margin:0 10px;flex:none}"
@@ -24,18 +23,31 @@ if (typeof document !== 'undefined' && document.querySelector(`style[data-plugin
   document.head.appendChild(style)
 }
 
-type StatsLineProps = PropsRuntime<'conversation.composer.dock'> & PropsLocale<'conversation'>
+const EMPTY_NODES: readonly unknown[] = []
+
+/**
+ * Current-DSH composer.dock occupant props: the `t` seat from the `chat`
+ * locale namespace, plus the standard session hooks. `useProjection` comes
+ * from `dsh-client-ui-session` and `useChat` from `dsh-client-ui-chat`; both
+ * are optional so the line still renders in a composition missing either.
+ */
+type StatsLineProps = PropsLocale<'chat'> & {
+  useChat?: SnapshotSelectorHook<ChatSnapshot>
+  useProjection?: UseProjection
+}
 
 function DecimalStatsLineComponent({
-  useSession,
+  useChat,
   useProjection,
   t,
 }: StatsLineProps): React.ReactNode {
-  const readProjection = useProjection as unknown as (key: string) => unknown
-  const settledNodes = useSession((snapshot) => snapshot.chat.legacy.nodes)
-  const usage = readProjection('tokenUsage') as TokenUsageProjection | undefined
-  const projected = readProjection('sessionStats') as SessionStatsProjection | undefined
-  const stats = React.useMemo(() => projected ?? deriveStats(settledNodes), [projected, settledNodes])
+  const usage = useProjection?.('tokenUsage')
+  const projected = useProjection?.('sessionStats')
+  const chat: SnapshotSelectorHook<ChatSnapshot> | undefined = useChat
+  const nodes = chat !== undefined
+    ? chat((snapshot: ChatSnapshot) => snapshot.legacy.nodes)
+    : EMPTY_NODES
+  const stats = React.useMemo(() => projected ?? deriveStats(nodes), [projected, nodes])
 
   const groups: string[] = []
   if (stats.steps > 0) {
@@ -110,4 +122,4 @@ function DecimalStatsLineComponent({
   })
 }
 
-export const DecimalStatsLine = React.memo(DecimalStatsLineComponent)
+export const DecimalStatsLine = DecimalStatsLineComponent
