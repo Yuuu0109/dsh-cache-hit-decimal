@@ -1,7 +1,7 @@
 {
   "name": "@yuuu0109/dsh-cache-hit-decimal",
   "description": "DeepSeek Harness web plugin that displays cache-hit rate with two decimal places",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "packageManager": "pnpm@11.21.0",
   "engines": {
@@ -32,11 +32,8 @@
     "client": {
       "platform": "web",
       "inject": [
-        "@deepseek-ai/dsh-client-ui-renderer",
-        "@deepseek-ai/dsh-client-ui-session",
         "@deepseek-ai/dsh-client-ui-conversation",
-        "@deepseek-ai/dsh-client-ui-chat",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "@deepseek-ai/dsh-client-ui-chat"
       ]
     }
   },
@@ -64,28 +61,26 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.2",
-    "@deepseek-ai/dsh-api-session-controller": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-chat": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-conversation": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-primitives": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-renderer": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-session": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-slots": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-session-stats": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-token-meter": "^0.1.2-alpha.4",
+    "@deepseek-ai/dsh-api-session-controller": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-chat": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-conversation": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-renderer": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-session": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-stats": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-token-meter": "^0.1.5-rc.2",
     "react": "^18.2.0"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.2",
-    "@deepseek-ai/dsh-api-session-controller": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-chat": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-conversation": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-primitives": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-renderer": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-session": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-client-ui-slots": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-session-stats": "^0.1.2-alpha.4",
-    "@deepseek-ai/dsh-token-meter": "^0.1.2-alpha.4",
+    "@deepseek-ai/dsh-api-session-controller": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-chat": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-conversation": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-renderer": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-session": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-stats": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-token-meter": "^0.1.5-rc.2",
     "@types/node": "^22.19.0",
     "@types/react": "^18.3.1",
     "react": "^18.2.0",

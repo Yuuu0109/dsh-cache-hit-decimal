@@ -1,12 +1,14 @@
 import { defineConfig } from 'tsdown'
 
 const id = '@yuuu0109/dsh-cache-hit-decimal'
+// Platform seed words only. `@deepseek-ai/dsh-client-ui-primitives` used to be
+// listed here for the Tooltip import; the line now carries its hover text on a
+// native `title`, so the bundle needs nothing beyond React.
 const clientExternals = [
   'react',
   'react/jsx-runtime',
   'react-dom',
   'react-dom/client',
-  '@deepseek-ai/dsh-client-ui-primitives',
 ]
 
 export default defineConfig([

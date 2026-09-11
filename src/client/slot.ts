@@ -1,7 +1,8 @@
+import type { Translate } from './locale'
+
 export const STATS_DOCK_NAME = 'conversation.composer.dock'
 export const STATS_SLOT_ID = 'stats'
 export const STATS_SLOT_PRIORITY = -1
-export const STATS_LOCALE = 'chat'
 
 /** Minimal runtime face of the current `ctx.slots` service this plugin uses. */
 interface SlotRegistrarLike {
@@ -15,14 +16,21 @@ interface SlotRegistrarLike {
  * registers the same cell at priority 0; priority -1 shadows it, and
  * disposing the returned slot registration restores the native integer
  * formatting.
+ *
+ * No `locale` option is declared: the seat it binds reads the slot's
+ * namespace, and this plugin carries its own dictionary (see `./locale`). The
+ * translator is supplied to the component here instead.
  */
-export function installStatsOverride(ctx: { slots: SlotRegistrarLike }, component: unknown): void {
+export function installStatsOverride(
+  ctx: { slots: SlotRegistrarLike },
+  component: (props: { t: Translate }) => unknown,
+  translate: Translate,
+): void {
   const slots = ctx.slots
   slots.inject(STATS_DOCK_NAME, () => slots.register({
     name: STATS_DOCK_NAME,
     id: STATS_SLOT_ID,
     order: 0,
     priority: STATS_SLOT_PRIORITY,
-    locale: STATS_LOCALE,
-  }, component))
+  }, (props: Record<string, unknown>) => component({ ...props, t: translate })))
 }

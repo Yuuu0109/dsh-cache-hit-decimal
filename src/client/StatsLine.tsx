@@ -1,8 +1,8 @@
 import * as React from 'react'
 import type { UseProjection } from '@deepseek-ai/dsh-api-session-controller/client'
 import type { ChatSnapshot } from '@deepseek-ai/dsh-client-ui-chat/client'
-import type { PropsLocale, SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots'
-import { Tooltip } from '@deepseek-ai/dsh-client-ui-primitives'
+import type { SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots'
+import type { Translate } from './locale'
 import {
   billedInputTokens,
   cacheHitPercent,
@@ -12,7 +12,7 @@ import {
   formatTokensPerSecond,
 } from './stats'
 
-const css = ".DChp_root{box-sizing:border-box;width:max-content;max-width:none;padding:4px calc(var(--dsh-composer-side-clearance) + 16px) 0;color:var(--dsw-alias-label-tertiary);white-space:nowrap;text-overflow:clip;margin:0 auto;font-size:12px;line-height:20px;display:flex;flex-wrap:nowrap;justify-content:center;overflow:visible}.DChp_sep{color:var(--dsw-alias-separator-primary);margin:0 10px;flex:none}"
+const css = ".DChp_root{box-sizing:border-box;width:max-content;max-width:none;padding:4px calc(var(--dsh-composer-side-clearance, 0px) + 16px) 0;color:var(--dsw-alias-label-tertiary);white-space:nowrap;text-overflow:clip;margin:0 auto;font-size:12px;line-height:20px;display:flex;flex-wrap:nowrap;justify-content:center;overflow:visible}.DChp_sep{color:var(--dsw-alias-separator-primary, currentColor);opacity:.6;margin:0 10px;flex:none}"
 const cssTagId = '@yuuu0109/dsh-cache-hit-decimal/StatsLine.css'
 
 if (typeof document !== 'undefined' && document.querySelector(`style[data-plugin-css="${cssTagId}"]`) === null) {
@@ -26,12 +26,13 @@ if (typeof document !== 'undefined' && document.querySelector(`style[data-plugin
 const EMPTY_NODES: readonly unknown[] = []
 
 /**
- * Current-DSH composer.dock occupant props: the `t` seat from the `chat`
- * locale namespace, plus the standard session hooks. `useProjection` comes
- * from `dsh-client-ui-session` and `useChat` from `dsh-client-ui-chat`; both
- * are optional so the line still renders in a composition missing either.
+ * Current seated props: the plugin-owned translator injected by the slot
+ * registration, plus the standard session hooks. `useProjection` comes from
+ * `dsh-client-ui-session` and `useChat` from `dsh-client-ui-conversation`;
+ * both are optional so the line still renders in a composition missing either.
  */
-type StatsLineProps = PropsLocale<'chat'> & {
+type StatsLineProps = {
+  t: Translate
   useChat?: SnapshotSelectorHook<ChatSnapshot>
   useProjection?: UseProjection
 }
@@ -82,26 +83,16 @@ function DecimalStatsLineComponent({
     }))
   }
 
-  const line = groups.join(' | ')
-  const rootRef = React.useRef<HTMLDivElement | null>(null)
-  const [truncated, setTruncated] = React.useState(false)
-
-  React.useLayoutEffect(() => {
-    const element = rootRef.current
-    if (element === null) return
-    const measure = () => setTruncated(element.scrollWidth > element.clientWidth)
-    measure()
-    if (typeof ResizeObserver === 'undefined') return
-    const observer = new ResizeObserver(measure)
-    observer.observe(element)
-    return () => observer.disconnect()
-  }, [line])
-
   if (groups.length === 0) return null
 
-  const content = React.createElement('div', {
-    ref: rootRef,
+  const line = groups.join(' | ')
+
+  // The full line rides a native `title` instead of the primitives `Tooltip`:
+  // one less cross-package import for identical hover behaviour.
+  return React.createElement('div', {
     className: 'DChp_root',
+    title: line,
+    'data-cache-hit-decimal': '1',
   }, groups.map((group, index) => React.createElement(React.Fragment, {
     key: `${index}-${group}`,
   }, index > 0
@@ -112,14 +103,6 @@ function DecimalStatsLineComponent({
         'aria-hidden': true,
       }, '|'), ' ')
     : null, React.createElement('span', null, group))))
-
-  return React.createElement(Tooltip, {
-    label: line,
-    side: 'top',
-    delayMs: 500,
-    disabled: !truncated,
-    children: content,
-  })
 }
 
 export const DecimalStatsLine = DecimalStatsLineComponent

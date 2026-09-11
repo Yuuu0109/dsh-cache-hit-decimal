@@ -1,14 +1,16 @@
 import * as React from 'react';
 import type { UseProjection } from '@deepseek-ai/dsh-api-session-controller/client';
 import type { ChatSnapshot } from '@deepseek-ai/dsh-client-ui-chat/client';
-import type { PropsLocale, SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots';
+import type { SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots';
+import type { Translate } from './locale';
 /**
- * Current-DSH composer.dock occupant props: the `t` seat from the `chat`
- * locale namespace, plus the standard session hooks. `useProjection` comes
- * from `dsh-client-ui-session` and `useChat` from `dsh-client-ui-chat`; both
- * are optional so the line still renders in a composition missing either.
+ * Current seated props: the plugin-owned translator injected by the slot
+ * registration, plus the standard session hooks. `useProjection` comes from
+ * `dsh-client-ui-session` and `useChat` from `dsh-client-ui-conversation`;
+ * both are optional so the line still renders in a composition missing either.
  */
-type StatsLineProps = PropsLocale<'chat'> & {
+type StatsLineProps = {
+    t: Translate;
     useChat?: SnapshotSelectorHook<ChatSnapshot>;
     useProjection?: UseProjection;
 };
