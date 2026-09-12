@@ -1,5 +1,11 @@
 # dsh-cache-hit-decimal
 
+> **停止维护（2026-09-12）——功能已由官方客户端实现。**
+> DeepSeek Harness 官方客户端已自行按两位小数显示缓存命中率：官方 `@deepseek-ai/dsh-client-ui-chat`
+> 包内置 `cache-hit-2dp` 格式化（已在 `0.1.5-rc.2` 中确认），统计条与单轮用量面板均已使用。本插件
+> 唯一的作用因此重复，**本仓库不再更新，也不再发布新版本**。最后一个已发布版本（`0.2.0`）仍留在
+> npm 上供旧运行时使用，以下内容仅作参考保留。
+
 一个轻量的 DeepSeek Harness Web 插件，将原生整数缓存命中率替换为保留两位小数的显示，例如 `42.86%`。
 
 ![缓存命中率](docs/screenshots/cache-hit-decimal.png)

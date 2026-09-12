@@ -1,5 +1,13 @@
 # dsh-cache-hit-decimal
 
+> **Discontinued (2026-09-12) — the official client now does this.**
+> DeepSeek Harness renders the cache-hit rate with two decimals on its own: the official
+> `@deepseek-ai/dsh-client-ui-chat` package ships the `cache-hit-2dp` formatting (verified in
+> `0.1.5-rc.2`) and uses it in both the composer stats line and the turn-usage panel. That was
+> this plugin's only purpose, so it is redundant now — **this repository is no longer updated and
+> no further versions will be published.** The last published release (`0.2.0`) stays on npm for
+> older runtimes; everything below is kept for reference.
+
 A small DeepSeek Harness Web plugin that replaces the native integer cache-hit percentage with a two-decimal value, such as `42.86%`.
 
 ![Cache-hit decimal](docs/screenshots/cache-hit-decimal.png)
